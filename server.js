@@ -9,8 +9,6 @@ dns.setDefaultResultOrder("ipv4first")
 // Rutas de Jhon
 import authRoutes      from "./routes/authRoutes.js"
 import usuariosRoutes  from "./routes/usuariosRoutes.js"
-import asistenteRoutes from "./routes/asistenteRoutes.js"
-import fincasRoutes    from "./routes/fincasRoutes.js"
 import preferenciasRoutes from "./routes/preferenciasRoutes.js"
 
 // Rutas tuyas
@@ -18,7 +16,9 @@ import productosRoutes from "./routes/productosRoutes.js"
 import pedidosRoutes   from "./routes/pedidosRoutes.js"
 import facturasRoutes  from "./routes/facturasRoutes.js"
 import correoRoutes    from "./routes/correoRoutes.js"
-import lotesRoutes     from "./routes/lotesRoutes.js"
+
+// Comentarios del catálogo (frontend escribe en /resenas)
+import resenasRoutes   from "./routes/resenasRoutes.js"
 
 // Contenido público de la tienda Nathalia (textos, logo, catálogo e imágenes)
 import tiendaRoutes from "./routes/tiendaRoutes.js"
@@ -54,11 +54,9 @@ app.use(express.json({ limit: '40mb' }))
 // Rutas cliente
 app.use("/auth",      authRoutes)
 app.use("/usuarios",  usuariosRoutes)
-app.use("/asistente", asistenteRoutes)
-app.use("/fincas",    fincasRoutes)
 app.use("/productos", productosRoutes)
 app.use("/pedidos",   pedidosRoutes)
-app.use("/lotes",     lotesRoutes)
+app.use("/resenas",   resenasRoutes)
 app.use("/api/preferencias", preferenciasRoutes)
 
 
