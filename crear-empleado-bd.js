@@ -16,7 +16,7 @@ async function crearEmpleado() {
     
     console.log('✅ Empleado creado:', result.rows[0]);
     console.log('\nCredenciales para ingresar:');
-    console.log('Email: empleado.test@granova.cr');
+    console.log('Email: empleado.test@nathalia.cr');
     console.log('Contraseña: Empleado123!');
     
     process.exit(0);

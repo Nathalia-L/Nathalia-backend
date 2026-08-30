@@ -20,6 +20,10 @@ import facturasRoutes  from "./routes/facturasRoutes.js"
 import correoRoutes    from "./routes/correoRoutes.js"
 import lotesRoutes     from "./routes/lotesRoutes.js"
 
+// Contenido público de la tienda Nathalia (textos, logo, catálogo e imágenes)
+import tiendaRoutes from "./routes/tiendaRoutes.js"
+import { asegurarTabla } from "./controllers/tiendaController.js"
+
 // Rutas admin (Daniel)
 import dashboardRoutes    from "./routes/admin/dashboardRoutes.js"
 import inventarioRoutes   from "./routes/admin/inventarioRoutes.js"
@@ -35,7 +39,7 @@ const puerto = process.env.PORT || 3000
 app.set('trust proxy', 1)
 const origenesPermitidos = [
   'http://localhost:5173',
-  'https://granova-frontend.vercel.app'
+  'https://nathalia-frontend.vercel.app'
 ];
 
 app.use(cors({
@@ -44,7 +48,8 @@ app.use(cors({
 }));
 
 app.disable('x-powered-by')
-app.use(express.json())
+// Las imágenes subidas viajan como base64 dentro del contenido → límite amplio
+app.use(express.json({ limit: '40mb' }))
 
 // Rutas cliente
 app.use("/auth",      authRoutes)
@@ -72,11 +77,24 @@ app.use("/api/admin/pedidos", pedidosAdminRoutes)
 app.use("/api/usuarios",   usuariosAdminRoutes)
 app.use("/api/reportes",   reportesRoutes)
 
+// Contenido de la tienda: GET público (lo consumen todos los visitantes)
+// y PUT protegido (solo admin guarda los cambios).
+app.use("/api/tienda/contenido", tiendaRoutes)
+
 
 app.get("/", (req, res) => {
   res.json({ mensaje: "Backend de Granova activo" })
 })
 
-app.listen(puerto, () => {
-  console.log(`Servidor corriendo en el puerto ${puerto}`)
-})
+asegurarTabla()
+  .then(() => {
+    app.listen(puerto, () => {
+      console.log(`Servidor corriendo en el puerto ${puerto}`)
+    })
+  })
+  .catch((error) => {
+    console.error("No se pudo preparar la tabla de contenido:", error.message)
+    app.listen(puerto, () => {
+      console.log(`Servidor corriendo en el puerto ${puerto} (sin tabla de contenido)`)
+    })
+  })

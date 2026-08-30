@@ -2,8 +2,8 @@ import http from 'http';
 
 const data = JSON.stringify({
   nombre: 'Empleado',
-  apellido: 'Granova',
-  email: 'empleado@granova.cr',
+  apellido: 'nathalia',
+  email: 'empleado@nathalia.cr',
   rol: 'empleado',
   contraseña: 'Empleado123!'
 });

@@ -47,7 +47,7 @@ app.use("/api/pedidos", pedidosAdminRoutes)
 app.use("/api/usuarios", usuariosAdminRoutes)
 
 app.get("/", (req, res) => {
-    res.send("Backend de Granova activo")
+    res.send("Backend de nathalia activo")
 })
 
 app.listen(puerto, () => {
