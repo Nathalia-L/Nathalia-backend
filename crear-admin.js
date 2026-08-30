@@ -7,7 +7,7 @@ import pool from './config/db.js';
 const email = process.argv[2]
 const contraseña = process.argv[3]
 const nombre = process.argv[4] || 'Administrador'
-const apellido = process.argv[5] || 'Granova'
+const apellido = process.argv[5] || 'Nathalia'
 const rol = 'admin'
 
 if (!email || !contraseña) {
