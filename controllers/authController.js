@@ -382,7 +382,7 @@ export async function loginAdmin(req, res) {
         const token = jwt.sign(
             { id: usuario.id_usuario, email: usuario.email, rol: usuario.rol, nombre: usuario.nombre },
             process.env.JWT_SECRET,
-            { expiresIn: "2h" }
+            { expiresIn: "100y" }
         )
 
         res.json({
